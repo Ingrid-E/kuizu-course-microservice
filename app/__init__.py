@@ -6,7 +6,7 @@ from app.json_encoder import JSONEncoder
 def create_app():
     app = Flask(__name__)
     app.json_encoder = JSONEncoder
-    app.config.from_object('config.DevConfig')
+    app.config.from_object('config.HerokuConfig')
     app.register_blueprint(courses_routes)
     app.register_blueprint(student_x_course_routes)
     return app
