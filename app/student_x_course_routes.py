@@ -59,3 +59,31 @@ def find_student_courses(id_student):
     except Exception as ex:
         print(ex)
         return {"success":False, "data":{"title":"Internal Server Error"}}, 500
+
+@student_x_course_routes.route("/student-courses-avg/<id_student>", methods=['GET'])
+def get_student_course_avg(id_student):
+    try:
+        data = student_x_course_db.find({"id_student":int(id_student)})
+        courses_list = []
+        for student in data:
+            student = dict(student)
+            #Add logic connecting to note micro to check 
+            courses_list.append({"course":student["course"]["name"], "shortName":student["course"]["shortName"], "average":0, "id_course":student["course"]["_id"]})
+        return {"success":True, "data":{"courses": courses_list}}, 200
+    except Exception as ex:
+        print(ex)
+        return {"success":False, "data":{"title":"Internal Server Error"}}, 500
+
+@student_x_course_routes.route("/teacher-course-avg/<id_teacher>", methods=['GET'])
+def get_teacher_course_avg(id_teacher):
+    try:
+        courses = courses_db.find({"id_teacher":id_teacher})
+        courses_list = []
+        for course in courses:
+            #Logica de promedio de estudiantes
+            course = dict(course)
+            courses_list.append({"course":course["name"], "shortName":course["shortName"], "average":0, "id_course":course["_id"]})
+        return {"success":True, "data":{"courses": courses_list}}, 200
+    except Exception as ex:
+        print(ex)
+        return {"success":False, "data":{"title":"Internal Server Error"}}, 500

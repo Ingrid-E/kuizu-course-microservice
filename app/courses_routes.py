@@ -27,6 +27,19 @@ def find_course(id):
         print(ex)
         return {"success":False, "data":{"title":"Internal Server Error"}}, 500
 
+@courses_routes.route("/", methods=['GET'])
+def get_all():
+    try:
+        courses = courses_db.find()
+        courses_list = []
+        for course in courses:
+            courses_list.append(dict(course))
+        return {"success":True, "data":{"courses": courses_list}}, 200
+    except Exception as ex:
+        print(ex)
+        return {"success":False, "data":{"title":"Internal Server Error"}}, 500
+
+
 @courses_routes.route("/teacher-courses/<id_teacher>", methods=['GET'])
 def find_teacher_courses(id_teacher):
     try:
