@@ -22,4 +22,5 @@ jobs:
         name: Build
         url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
         status: ${{ job.status }}
+    - run: python get_all_courses_test.py
       if: always()
