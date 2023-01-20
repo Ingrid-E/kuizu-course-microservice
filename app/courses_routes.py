@@ -2,10 +2,12 @@ from flask import Blueprint, request, jsonify
 from app.database import dbConnection
 from app.courses_model import Course
 from bson.objectid import ObjectId
+from flask_cors import CORS
 
 db = dbConnection()
 courses_db = db['Course']
 courses_routes = Blueprint("courses_routes", __name__)
+CORS(courses_routes)
 
 @courses_routes.route("/", methods=['POST'])
 def create_course():
