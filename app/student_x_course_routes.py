@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, Flask
+from flask import Blueprint, request, jsonify
 from app.database import dbConnection
 from app.student_x_course_model import StudentXCourse
 from bson.objectid import ObjectId
