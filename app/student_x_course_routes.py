@@ -6,6 +6,7 @@ from datetime import date
 from flask_cors import CORS
 
 
+
 db = dbConnection()
 courses_db = db['Course']
 student_x_course_db = db['StudentXCourse']
