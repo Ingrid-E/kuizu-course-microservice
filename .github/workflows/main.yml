@@ -21,8 +21,12 @@ jobs:
           python-version: '3.10.9'
           cache: 'pip'
       - run: pip install -r requirements.txt
+<<<<<<< HEAD
       - run: python all_test.py
 
+=======
+      
+>>>>>>> 1a4758cad09456118b2a146851db85b72421e2b7
   test:
     needs: [build]
     name: Test 🧪
@@ -33,7 +37,11 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10.9'
+<<<<<<< HEAD
       - run: python all_test.py
+=======
+      - run: python get_all_courses_test.py
+>>>>>>> 1a4758cad09456118b2a146851db85b72421e2b7
   
   alert:
     if: ${{ always() }}
@@ -50,4 +58,3 @@ jobs:
         name: Build
         url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
         status: ${{ job.status }}
-      if: always()
