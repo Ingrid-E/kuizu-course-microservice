@@ -7,7 +7,11 @@ from flask_cors import CORS
 db = dbConnection()
 courses_db = db['Course']
 courses_routes = Blueprint("courses_routes", __name__)
+<<<<<<< HEAD
+student_x_course_db = db['StudentXCourse']
+=======
 CORS(courses_routes)
+>>>>>>> 28fa452f37bbd5ddeede9635152d918f31f65bf7
 
 @courses_routes.route("/", methods=['POST'])
 def create_course():
@@ -58,10 +62,15 @@ def find_teacher_courses(id_teacher):
 def update_course(id):
     data = request.get_json()
     try:
+        data_student_x_course = student_x_course_db.find({"course._id":ObjectId(id)})
         course = Course(data)
-        print(course.toDBCollection())
         courses_db.update_one({"_id":ObjectId(id)}, 
                                         {"$set":course.toDBCollection()})
+
+        for courses in data_student_x_course:
+            courses = dict(courses)
+            print(courses)
+            student_x_course_db.update_one({"_id":ObjectId(courses["_id"])}, {"$set":{"course":course.toDBCollection()}})
         return {"success":True, "data":{"title":"Course Updated!", "course":str(id)}}, 200
     except Exception as ex:
         print(ex)
