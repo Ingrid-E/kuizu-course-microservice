@@ -3,12 +3,14 @@ from app.database import dbConnection
 from app.student_x_course_model import StudentXCourse
 from bson.objectid import ObjectId
 from datetime import date
+from flask_cors import CORS
+
 
 db = dbConnection()
 courses_db = db['Course']
 student_x_course_db = db['StudentXCourse']
 student_x_course_routes = Blueprint("studentXcourse_routes", __name__)
-
+CORS(student_x_course_routes)
 @student_x_course_routes.route("/add-student", methods=['POST'])
 def create_course():
     data = request.get_json()
