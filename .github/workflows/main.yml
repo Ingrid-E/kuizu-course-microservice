@@ -21,11 +21,23 @@ jobs:
           python-version: '3.10.9'
           cache: 'pip'
       - run: pip install -r requirements.txt
+      
+  test:
+    needs: [build]
+    name: Test 🧪
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10.9'
       - run: python get_all_courses_test.py
   
-  my_job:
-    needs: [build]
-    name: Google Hook 🤖
+  alert:
+    if: ${{ always() }}
+    needs: [test]
+    name: Alert 🤖
     runs-on: ubuntu-latest
 
     steps:
@@ -37,4 +49,3 @@ jobs:
         name: Build
         url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
         status: ${{ job.status }}
-      if: always()
