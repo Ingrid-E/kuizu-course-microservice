@@ -21,7 +21,6 @@ jobs:
           python-version: '3.10.9'
           cache: 'pip'
       - run: pip install -r requirements.txt
-      - run: python all_test.py
 
   test:
     needs: [build]
