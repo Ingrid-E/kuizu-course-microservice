@@ -1,11 +1,10 @@
+import sys, os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.abspath(os.path.join(current_dir, '..', '..')))
+print(sys.path)
 import unittest
 from unittest.mock import patch
-from app.courses_routes import get_all
-from app.courses_routes import find_course
-from app.courses_routes import find_teacher_courses
-from bson.objectid import ObjectId
-
-
+from app.courses_routes import get_all, find_course, find_teacher_courses
 
 class TestAPI(unittest.TestCase):
     @patch('pymongo.collection.Collection.find')
