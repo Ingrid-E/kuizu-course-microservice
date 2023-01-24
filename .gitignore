@@ -36,6 +36,7 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+.github
 
 # Unit test / coverage reports
 htmlcov/
@@ -83,6 +84,15 @@ ipython_config.py
 
 # pyenv
 .python-version
+
+
+
+app/tests/test_delete.py
+app/tests/studentCoursesAvg_test.py
+app/tests/test_get_courses_avg_student.py
+app/tests/test_get_courses_avg_teacher.py
+app/tests/test_get_courses_student.py
+app/tests/test_update_course.py
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
