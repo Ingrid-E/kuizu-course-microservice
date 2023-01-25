@@ -7,11 +7,8 @@ from flask_cors import CORS
 db = dbConnection()
 courses_db = db['Course']
 courses_routes = Blueprint("courses_routes", __name__)
-<<<<<<< HEAD
 student_x_course_db = db['StudentXCourse']
-=======
 CORS(courses_routes)
->>>>>>> 28fa452f37bbd5ddeede9635152d918f31f65bf7
 
 @courses_routes.route("/", methods=['POST'])
 def create_course():

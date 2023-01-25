@@ -87,12 +87,13 @@ ipython_config.py
 
 
 
-app/tests/test_delete.py
-app/tests/studentCoursesAvg_test.py
-app/tests/test_get_courses_avg_student.py
-app/tests/test_get_courses_avg_teacher.py
-app/tests/test_get_courses_student.py
-app/tests/test_update_course.py
+app/tests/test_delete.txt
+app/tests/teacherCourseAvg_test.txt
+app/tests/studentCoursesAvg_test.txt
+app/tests/test_get_courses_avg_student.txt
+app/tests/test_get_courses_avg_teacher.txt
+app/tests/test_get_courses_student.txt
+app/tests/test_update_course.txt
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
