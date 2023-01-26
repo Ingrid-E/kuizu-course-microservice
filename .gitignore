@@ -142,7 +142,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 config.py
-
-#env variables
-config.py
-run.py
