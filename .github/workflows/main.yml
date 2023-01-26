@@ -33,7 +33,7 @@ jobs:
           python-version: '3.10.9'
           cache: 'pip'
       - run: pip install -r requirements.txt
-      - run: python -m unittest
+      - run: python alltest.py
   
   alert:
     if: ${{ always() }}
