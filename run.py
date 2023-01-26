@@ -6,5 +6,5 @@ app = create_app()
 CORS(app)
 
 if __name__ == '__main__':
-    port = os.getenv('PORT', default=8000)
+    port = os.getenv('PORT', default=3001)
     app.run(host="0.0.0.0", port=port)
