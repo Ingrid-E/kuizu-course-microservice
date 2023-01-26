@@ -61,6 +61,19 @@ def find_student_courses(id_student):
         print(ex)
         return {"success":False, "data":{"title":"Internal Server Error"}}, 500
 
+@student_x_course_routes.route("/course-students/<id_course>", methods=['GET'])
+def find_course_students(id_course):
+    try:
+        data = student_x_course_db.find({"course._id":ObjectId(id_course)})
+        student_list = []
+        for student in data:
+            student = dict(student)
+            student_list.append(student["id_student"])
+        return {"success":True, "data":{"students": student_list}}, 200
+    except Exception as ex:
+        print(ex)
+        return {"success":False, "data":{"title":"Internal Server Error"}}, 500
+
 @student_x_course_routes.route("/student-courses-avg/<id_student>", methods=['GET'])
 def get_student_course_avg(id_student):
     try:
