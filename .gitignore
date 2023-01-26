@@ -94,9 +94,6 @@ app/tests/test_get_courses_avg_student.txt
 app/tests/test_get_courses_avg_teacher.txt
 app/tests/test_get_courses_student.txt
 app/tests/test_update_course.txt
-app/tests/a.py
-app/tests/b.py
-app/tests/all_letters.py
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
