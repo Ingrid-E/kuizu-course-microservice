@@ -83,7 +83,7 @@ def get_student_course_avg(id_student):
         courses_list = []
         for student in data:
             student = dict(student)
-            courses_list.append({"course":student["course"]["name"], "shortName":student["course"]["shortName"], "average":course_average(str(student["course"]["_id"]), id_student), "id_course":student["course"]["_id"]})
+            courses_list.append({"course":student["course"]["name"], "shortName":student["course"]["shortName"], "average":student_course_average(str(student["course"]["_id"]), id_student), "id_course":student["course"]["_id"]})
         return {"success":True, "data":{"courses": courses_list}}, 200
     except Exception as ex:
         print(ex)
@@ -97,17 +97,24 @@ def get_teacher_course_avg(id_teacher):
         for course in courses:
             #Logica de promedio de estudiantes
             course = dict(course)
-            courses_list.append({"course":course["name"], "shortName":course["shortName"], "average":0, "id_course":course["_id"]})
+            courses_list.append({"course":course["name"], "shortName":course["shortName"], "average":course_average(str(course["_id"])), "id_course":course["_id"]})
         return {"success":True, "data":{"courses": courses_list}}, 200
     except Exception as ex:
         print(ex)
         return {"success":False, "data":{"title":"Internal Server Error"}}, 500
 
-def course_average(id_course, id_student):
+def student_course_average(id_course, id_student):
     url = HerokuConfig.GATEWAY_URL+'/exam/course/'+id_course+'/student/' + id_student
     response = requests.get(url)
     data = response.json()['data']['data']
     return data
+
+def course_average(id_course):
+    url = HerokuConfig.GATEWAY_URL+'/course/average/'+id_course
+    response = requests.get(url)
+    data = response.json()['data']['data']['average']
+    return data
+
 
 
 
