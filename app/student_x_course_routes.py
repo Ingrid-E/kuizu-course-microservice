@@ -4,7 +4,9 @@ from app.student_x_course_model import StudentXCourse
 from bson.objectid import ObjectId
 from datetime import date
 from flask_cors import CORS
-
+from config import HerokuConfig
+import requests
+import json
 
 db = dbConnection()
 courses_db = db['Course']
@@ -81,8 +83,7 @@ def get_student_course_avg(id_student):
         courses_list = []
         for student in data:
             student = dict(student)
-            #Add logic connecting to note micro to check 
-            courses_list.append({"course":student["course"]["name"], "shortName":student["course"]["shortName"], "average":0, "id_course":student["course"]["_id"]})
+            courses_list.append({"course":student["course"]["name"], "shortName":student["course"]["shortName"], "average":course_average(str(student["course"]["_id"]), id_student), "id_course":student["course"]["_id"]})
         return {"success":True, "data":{"courses": courses_list}}, 200
     except Exception as ex:
         print(ex)
@@ -101,3 +102,12 @@ def get_teacher_course_avg(id_teacher):
     except Exception as ex:
         print(ex)
         return {"success":False, "data":{"title":"Internal Server Error"}}, 500
+
+def course_average(id_course, id_student):
+    url = HerokuConfig.GATEWAY_URL+'/exam/course/'+id_course+'/student/' + id_student
+    response = requests.get(url)
+    data = response.json()['data']['data']
+    return data
+
+
+
