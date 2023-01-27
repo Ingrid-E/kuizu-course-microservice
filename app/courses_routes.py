@@ -1,8 +1,9 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from app.database import dbConnection
 from app.courses_model import Course
 from bson.objectid import ObjectId
 from flask_cors import CORS
+
 
 db = dbConnection()
 courses_db = db['Course']
