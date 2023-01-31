@@ -93,11 +93,11 @@ def update_course(id):
         course = Course(data)
         courses_db.update_one({"_id":ObjectId(id)}, 
                                         {"$set":course.toDBCollection()})
-
         for courses in data_student_x_course:
             courses = dict(courses)
-            print(courses)
-            student_x_course_db.update_one({"_id":ObjectId(courses["_id"])}, {"$set":{"course":course.toDBCollection()}})
+            courseDB = course.toDBCollection()
+            courseDB['_id'] = ObjectId(id)
+            student_x_course_db.update_one({"_id":ObjectId(courses["_id"])}, {"$set":{"course":courseDB}})
         return {"success":True, "data":{"title":"Course Updated!", "course":str(id)}}, 200
     except Exception as ex:
         print(ex)
