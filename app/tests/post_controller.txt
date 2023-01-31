@@ -1,0 +1,30 @@
+import sys, os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.abspath(os.path.join(current_dir, '..', '..')))
+print(sys.path)
+
+import unittest
+from flask import Flask, request, Blueprint
+from app.courses_routes import create_course
+
+courses_routes = Blueprint("courses_routes", __name__)
+
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def create_item():
+    return create_course()
+
+class MyTestCase(unittest.TestCase):
+    def setUp(self):
+        # Create a test client
+        self.client = app.test_client()
+
+    def test_create_item(self):
+        # Make a POST request to the index endpoint with data
+        response = self.client.post("/", data='{"_id": "1", "icon": "icon.png", "name": "Mathematics", "description": "Math course","shortName": "Math", "createdAt": "2022-12-13", "startAt": "2022-12-18", "endAt": "2022-12-20", "id_teacher": "1"}',
+                                    content_type='application/json')
+        self.assertEqual(response.status, 200)
+    
+if __name__ == '__main__':
+    unittest.main()
